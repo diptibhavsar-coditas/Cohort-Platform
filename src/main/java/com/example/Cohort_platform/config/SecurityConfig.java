@@ -1,8 +1,8 @@
 package com.example.Cohort_platform.config;
 
-import com.coditas.electricity.security.CustomUserDetailsService;
-import com.coditas.electricity.security.JwtAuthEntryPoint;
-import com.coditas.electricity.security.JwtAuthFilter;
+import com.example.Cohort_platform.security.CustomUserDetailsService;
+import com.example.Cohort_platform.security.JwtAuthEntryPoint;
+import com.example.Cohort_platform.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,7 +64,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        //provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
