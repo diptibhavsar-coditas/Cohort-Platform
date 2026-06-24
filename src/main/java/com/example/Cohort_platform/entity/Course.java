@@ -23,9 +23,7 @@ public class Course {
 
     private String courseDuration;
 
-    private String assignment;
-
-
+    private String studyMaterial;
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
