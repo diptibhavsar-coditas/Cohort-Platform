@@ -19,25 +19,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String fullName ;
+    private String firstName;
 
-    @Email
-    @Column(nullable = false)
+    private String lastName;
+
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
-
-    @Column(nullable = false)
-    private String phoneNo;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    private boolean active;
+    private boolean enabled;
 }

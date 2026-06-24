@@ -1,33 +1,30 @@
 package com.example.Cohort_platform.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Assignment {
-
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private User receiver;
+
     private String title;
 
-    @Column(length = 2000)
-    private String description;
+    @Column(length = 1000)
+    private String message;
 
-    private LocalDateTime dueDate;
-
-    @ManyToOne
-    private Course course;
+    private boolean read;
 
     private LocalDateTime createdAt;
 }

@@ -1,35 +1,33 @@
 package com.example.Cohort_platform.entity;
 
+import com.example.Cohort_platform.Enum.QuestionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Getter
-@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
-@Table(name = "submissions")
-public class Submission {
-
+public class SessionQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Assignment assignment;
+    private LiveSession session;
 
     @ManyToOne
     private User student;
 
-    private String fileName;
-
-    private String filePath;
-
-    private LocalDateTime submittedAt;
+    @Column(length = 2000)
+    private String question;
 
     @Enumerated(EnumType.STRING)
-    private SubmissionStatus status;
+    private QuestionStatus status; // OPEN, ANSWERED
+
+    private LocalDateTime askedAt;
 }

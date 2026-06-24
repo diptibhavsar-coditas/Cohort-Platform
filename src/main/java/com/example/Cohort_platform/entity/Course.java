@@ -19,18 +19,14 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String courseName ;
+    private String courseName;
 
-    private String courseDuration;
+    @Column(length = 1000)
+    private String description;
 
-    private String studyMaterial;
+    private Integer maxStudents;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
     private User instructor;
-
-    @OneToMany
-    @JoinColumn(name = "student_id")
-    private User student;
 
 }

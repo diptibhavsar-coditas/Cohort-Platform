@@ -1,33 +1,28 @@
 package com.example.Cohort_platform.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Assignment {
-
+public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    @OneToOne
+    private Submission submission;
+
+    private Double marks;
 
     @Column(length = 2000)
-    private String description;
+    private String feedback;
 
-    private LocalDateTime dueDate;
-
-    @ManyToOne
-    private Course course;
-
-    private LocalDateTime createdAt;
+    private LocalDateTime gradedAt;
 }
