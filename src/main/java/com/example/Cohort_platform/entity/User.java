@@ -1,38 +1,57 @@
 package com.example.Cohort_platform.entity;
 
-
-import com.example.Cohort_platform.Enum.Role;
+import com.cohort.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
 @Table(name = "users")
-public class User {
+@Getter @Setter @NoArgsConstructor
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
-
-    @Column(unique = true)
+    @Column(nullable = false, unique = true, length = 150)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
 
-    @Column(nullable = false)
-    private String phone;
+    @Column(nullable = false, length = 100)
+    private String fullName;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
 
-    private boolean active;
+    @Column(nullable = false)
+    private boolean enabled = true;
 
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    // ── UserDetails ──────────────────────────────────────
+    @Override @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+    }
+    @Override @JsonIgnore public String getPassword()            { return passwordHash; }
+    @Override              public String getUsername()           { return email; }
+    @Override @JsonIgnore public boolean isAccountNonExpired()  { return true; }
+    @Override @JsonIgnore public boolean isAccountNonLocked()   { return true; }
+    @Override @JsonIgnore public boolean isCredentialsNonExpired() { return true; }
+    @Override              public boolean isEnabled()            { return enabled; }
 }

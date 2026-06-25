@@ -1,33 +1,37 @@
 package com.example.Cohort_platform.entity;
 
-import com.example.Cohort_platform.Enum.QuestionStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
+@Table(name = "session_questions")
+@Getter @Setter @NoArgsConstructor
 public class SessionQuestion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "session_id")
     private LiveSession session;
 
-    @ManyToOne
-    private User student;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "asker_id")
+    private User asker;
 
-    @Column(length = 2000)
-    private String question;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String text;
 
-    @Enumerated(EnumType.STRING)
-    private QuestionStatus status; // OPEN, ANSWERED
+    @Column(nullable = false)
+    private boolean answered = false;
 
-    private LocalDateTime askedAt;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime askedAt = LocalDateTime.now();
+
+    private LocalDateTime answeredAt;
 }
