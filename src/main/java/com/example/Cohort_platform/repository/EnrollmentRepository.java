@@ -1,8 +1,7 @@
 package com.example.Cohort_platform.repository;
 
-import com.cohort.entity.Course;
-import com.cohort.entity.Enrollment;
-import com.cohort.entity.User;
+import com.example.Cohort_platform.entity.Enrollment;
+import com.example.Cohort_platform.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -5,6 +5,7 @@ import com.cohort.dto.*;
 import com.cohort.entity.*;
 import com.cohort.exception.ResourceNotFoundException;
 import com.cohort.service.*;
+import com.example.Cohort_platform.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
