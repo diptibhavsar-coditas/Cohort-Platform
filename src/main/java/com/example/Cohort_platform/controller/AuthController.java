@@ -1,14 +1,10 @@
 package com.example.Cohort_platform.controller;
 
-import com.example.Cohort_platform.dto.request.LoginRequest;
-import com.example.Cohort_platform.dto.request.RegisterRequest;
-import com.example.Cohort_platform.dto.response.AuthResponse;
+import com.example.Cohort_platform.dto.AuthDto;
 import com.example.Cohort_platform.service.AuthService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirements;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,20 +14,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@Tag(name = "Auth", description = "Registration and login (public endpoints)")
-@SecurityRequirements // overrides global bearer auth requirement - these endpoints are public
 public class AuthController {
 
     private final AuthService authService;
 
+    /**
+     * POST /api/auth/register
+     * Body: { "fullName", "email", "password", "role": "STUDENT"|"INSTRUCTOR" }
+     * Returns: JWT token + user summary
+     */
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
+    public ResponseEntity<AuthDto.TokenResponse> register(
+            @Valid @RequestBody AuthDto.RegisterRequest req) {
+        AuthDto.TokenResponse response = authService.register(req);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    /**
+     * POST /api/auth/login
+     * Body: { "email", "password" }
+     * Returns: JWT token + user summary
+     */
     @PostMapping("/login")
-    @Operation(summary = "Login and receive a JWT bearer token")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<AuthDto.TokenResponse> login(
+            @Valid @RequestBody AuthDto.LoginRequest req) {
+        AuthDto.TokenResponse response = authService.login(req);
+        return ResponseEntity.ok(response);
     }
 }

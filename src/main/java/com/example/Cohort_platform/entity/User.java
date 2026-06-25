@@ -1,6 +1,6 @@
 package com.example.Cohort_platform.entity;
 
-import com.cohort.enums.Role;
+import com.example.Cohort_platform.Enum.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -43,7 +43,7 @@ public class User implements UserDetails {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // ── UserDetails ──────────────────────────────────────
+    // UserDetails
     @Override @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));

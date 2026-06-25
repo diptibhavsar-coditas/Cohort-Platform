@@ -1,14 +1,8 @@
 package com.example.Cohort_platform.service;
 
-import com.cohort.dto.AssignmentDto;
-import com.cohort.entity.Assignment;
-import com.cohort.entity.Course;
-import com.cohort.entity.Enrollment;
-import com.cohort.entity.User;
-import com.cohort.exception.ForbiddenException;
-import com.cohort.exception.ResourceNotFoundException;
-import com.cohort.repository.AssignmentRepository;
-import com.cohort.repository.EnrollmentRepository;
+
+import com.example.Cohort_platform.repository.AssignmentRepository;
+import com.example.Cohort_platform.repository.EnrollmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

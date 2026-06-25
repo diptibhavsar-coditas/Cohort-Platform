@@ -1,6 +1,6 @@
 package com.example.Cohort_platform.entity;
 
-import com.cohort.enums.SubmissionStatus;
+import com.example.Cohort_platform.Enum.SubmissionStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,11 @@
 package com.example.Cohort_platform.service;
 
-import com.cohort.dto.AuthDto;
-import com.cohort.entity.User;
-import com.cohort.exception.BusinessException;
-import com.cohort.repository.UserRepository;
-import com.cohort.security.JwtService;
+
+import com.example.Cohort_platform.dto.AuthDto;
+import com.example.Cohort_platform.entity.User;
+import com.example.Cohort_platform.exception.BusinessException;
+import com.example.Cohort_platform.repository.UserRepository;
+import com.example.Cohort_platform.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
