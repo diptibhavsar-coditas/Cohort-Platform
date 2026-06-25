@@ -21,6 +21,11 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleAlreadyRegisterUser(UserAlreadyExistException ex) {
+        return build(HttpStatus.BAD_REQUEST, "This User is already Registered");
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Map<String, Object>> handleBadCredentials(BadCredentialsException ex) {
         return build(HttpStatus.UNAUTHORIZED, "Invalid email or password");

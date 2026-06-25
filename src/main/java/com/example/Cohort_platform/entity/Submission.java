@@ -1,5 +1,6 @@
 package com.example.Cohort_platform.entity;
 
+import com.example.Cohort_platform.Enum.SubmissionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
 @Table(name = "submissions")
 public class Submission {
 

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Returns a clean JSON 401 response (instead of the default HTML) when an
+ * it will Return a clean JSON 401 response (instead of the default HTML) when an
  * unauthenticated request hits a protected endpoint, or the JWT is invalid/expired.
  */
 @Component
@@ -25,8 +25,8 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     @Override
-    public void commence(@NonNull HttpServletRequest request, HttpServletResponse response,
-                         @NonNull AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException) throws IOException, ServletException {
 
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());

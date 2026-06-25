@@ -19,17 +19,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
+    private String fullName;
 
     @Column(unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private boolean enabled;
+    private boolean active;
+
 }
