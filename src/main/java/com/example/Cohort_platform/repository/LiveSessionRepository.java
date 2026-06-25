@@ -1,16 +1,13 @@
 package com.example.Cohort_platform.repository;
 
-import com.example.Cohort_platform.entity.Course;
-import com.example.Cohort_platform.entity.LiveSession;
+import com.cohort.entity.Course;
+import com.cohort.entity.LiveSession;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
 public interface LiveSessionRepository extends JpaRepository<LiveSession, Long> {
-
-    List<LiveSession> findByCourse(Course course);
-
-    List<LiveSession> findByActiveTrue();
+    List<LiveSession> findByCourseOrderByCreatedAtDesc(Course course);
+    Optional<LiveSession> findByCourseAndOpenTrue(Course course);
 }
